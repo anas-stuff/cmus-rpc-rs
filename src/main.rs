@@ -1,8 +1,10 @@
-use crate::args::cli_options::CliOptions;
+use crate::config::Config::Config;
+
 mod args;
+mod config;
+mod debug;
+mod discord;
 
 fn main() {
-    let cli_options = CliOptions::new(args::get_args_app().get_matches());
-
-    
+    let conf = Config::new();
 }

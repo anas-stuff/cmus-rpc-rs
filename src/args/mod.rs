@@ -18,10 +18,10 @@ pub fn get_args_app() -> App<'static> {
                 .short('l')
                 .help("Linking with cmus (close the program if cmus is not running)")
                 .takes_value(false),
-            Arg::with_name("config")
-                .long("config")
+            Arg::with_name("config_path")
+                .long("config_path")
                 .short('c')
-                .help("Set custom path to config file")
+                .help("Set custom path to config_path file")
                 .takes_value(true),
             Arg::with_name("interval")
                 .long("interval")
