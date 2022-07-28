@@ -1,5 +1,5 @@
 use crate::args;
-use crate::config::ConfigFile;
+use crate::config::config_file;
 
 pub struct Config {
     pub debug: bool,
@@ -14,21 +14,19 @@ pub struct Config {
 impl Config {
     pub fn new() -> Config {
         let args_matches = args::get_args_app().get_matches();
-        let parsed_config = match ConfigFile::load() {
+        let parsed_config = match config_file::load() {
             Ok(config) => config,
             Err(e) => {
                 println!("Error loading config_path file: {}", e);
-                ConfigFile::create_default()
+                println!("Creating the default config file.");
+                config_file::create_default()
             }
         };
-        let mut configs = Config {
+        let configs = Config {
             debug: args_matches.is_present("debug") || parsed_config.debug,
             link: args_matches.is_present("link") || parsed_config.link,
             config_path: if args_matches.is_present("config_path") {
-                args_matches
-                    .value_of("config_path")
-                    .unwrap()
-                    .to_string()
+                args_matches.value_of("config_path").unwrap().to_string()
             } else {
                 parsed_config.config_path
             },
@@ -72,10 +70,11 @@ impl Config {
     }
 
     pub fn default() -> Config {
-        let config_path = format!("{}/{}", dirs::config_dir()
-            .unwrap_or_default()
-            .to_str()
-            .unwrap(), "cmus-rps-rs/config.conf");
+        let config_path = format!(
+            "{}/{}",
+            dirs::config_dir().unwrap_or_default().to_str().unwrap(),
+            "cmus-rps-rs/Config.conf"
+        );
         Config {
             debug: false,
             link: false,

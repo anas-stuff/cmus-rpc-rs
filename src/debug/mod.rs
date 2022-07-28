@@ -1,1 +1,1 @@
-pub(crate) mod Debugger;
+pub(crate) mod debugger;

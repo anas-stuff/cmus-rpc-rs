@@ -1,4 +1,4 @@
-use crate::config::Config::Config;
+use crate::config::config::Config;
 
 pub(crate) fn new(args_matches: clap::ArgMatches) -> Config {
     Config {
