@@ -1,22 +1,28 @@
+use discord_rich_presence::DiscordIpc;
 use crate::cmus;
 use crate::config::config;
 use crate::debug::debugger::Debugger;
 use crate::discord::formatter;
 
 pub struct DiscordController {
-    pub start_time: i32,
-    drpc: discord_rpc_client::Client,
+    started_time: i64,
+    drpc: discord_rich_presence::DiscordIpcClient,
 }
 
 impl DiscordController {
-    pub fn new(app_id: u64, debugger: &Debugger) -> DiscordController {
+    pub fn new(app_id: &str, debugger: &Debugger) -> DiscordController {
         let mut controller = DiscordController {
-            start_time: -1,
-            drpc: discord_rpc_client::Client::new(app_id),
+            started_time: 0,
+            drpc: discord_rich_presence::DiscordIpcClient::new(app_id).unwrap(),
         };
 
-        controller.drpc.start();
-
+        match controller.drpc.connect() {
+            Ok(_) => debugger.log("Connected to Discord"),
+            Err(e) => {
+                debugger.log_error(&format!("Failed to connect to Discord: {}", e));
+                std::process::exit(1);
+            }
+        }
         debugger.log("Discord RPC client started");
 
         controller
@@ -28,21 +34,38 @@ impl DiscordController {
 
         debugger.log("Updating presence");
 
+        if self.started_time == 0  {
+            self.started_time = std::time::Instant::now().elapsed().as_millis() as i64;
+        }
+
         let part_1 = formatter::format(configs.part_one_format.as_str(), &cmus_response);
         debugger.log(format!("part_1: {}", part_1).as_str());
         let part_2 = formatter::format(configs.part_two_format.as_str(), &cmus_response);
         debugger.log(format!("part_2: {}", part_2).as_str());
 
-        let activity = discord_rpc_client::models::Activity::new()
-            .state(part_2)
-            .details(part_1)
-            .assets(|assets| {
-                assets.large_image(&configs.large_image)
-                    .small_image(match cmus_response.state {
-                        cmus::responce::State::PLAYING => &configs.playing_image,
-                        _ => &configs.paused_image,
-                    })
-            });
-        self.drpc.set_activity(move |_| activity).expect("TODO: panic message");
+        match self.drpc.set_activity(discord_rich_presence::activity::Activity::new()
+            .state(part_2.as_str())
+            .details(part_1.as_str())
+            .assets(
+                discord_rich_presence::activity::Assets::new()
+                .large_image(configs.large_image.as_str())
+                .large_text(configs.large_text.as_str())
+                .small_image(
+                    match cmus_response.state {
+                        cmus::responce::State::PLAYING => configs.playing_image.as_str(),
+                        _ => configs.playing_image.as_str(),
+                    }
+                )
+                .small_text(
+                    match cmus_response.state {
+                        cmus::responce::State::PLAYING => configs.playing_text.as_str(),
+                        _ => configs.paused_text.as_str(),
+                    }
+                )
+            )
+                ) {
+            Ok(_) => debugger.log("Activity updated"),
+            Err(e) => debugger.log_error(format!("Error updating activity: {}", e).as_str()),
+        }
     }
 }

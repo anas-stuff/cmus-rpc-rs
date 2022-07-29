@@ -1,48 +1,55 @@
 use crate::config::config::Config;
 
 pub(crate) fn new(args_matches: clap::ArgMatches) -> Config {
+    let mut config: Config = Config::default();
     Config {
         debug: args_matches.is_present("debug"),
         link: args_matches.is_present("link"),
         config_path: args_matches
             .value_of("config_path")
-            .unwrap_or(
-                dirs::config_dir()
-                    .unwrap_or_default()
-                    .as_path()
-                    .to_str()
-                    .unwrap(),
-            )
+            .unwrap_or(config.config_path.as_str())
             .to_string(),
         interval: args_matches
             .value_of("interval")
-            .unwrap_or("1000")
+            .unwrap_or(config.interval.to_string().as_str())
             .parse::<u32>()
             .unwrap(),
         sleep: args_matches
             .value_of("sleep")
-            .unwrap_or("5000")
+            .unwrap_or(config.sleep.to_string().as_str())
             .parse::<u32>()
             .unwrap(),
         part_one_format: args_matches
             .value_of("part_one_format")
-            .unwrap_or("{artist} - {title}")
+            .unwrap_or(config.part_one_format.as_str())
             .to_string(),
         part_two_format: args_matches
             .value_of("part_two_format")
-            .unwrap_or("{album}")
+            .unwrap_or(config.part_two_format.as_str())
             .to_string(),
         large_image: args_matches
             .value_of("large_image")
-            .unwrap_or("cmus")
+            .unwrap_or(config.large_image.as_str())
             .to_string(),
         playing_image: args_matches
             .value_of("playing_image")
-            .unwrap_or("play_icon_2")
+            .unwrap_or(config.playing_image.as_str())
             .to_string(),
         paused_image: args_matches
             .value_of("paused_image")
-            .unwrap_or("pause_icon_2")
+            .unwrap_or(config.paused_image.as_str())
+            .to_string(),
+        large_text: args_matches
+            .value_of("large_text")
+            .unwrap_or(config.large_text.as_str())
+            .to_string(),
+        playing_text: args_matches
+            .value_of("playing_text")
+            .unwrap_or(config.playing_text.as_str())
+            .to_string(),
+        paused_text: args_matches
+            .value_of("paused_text")
+            .unwrap_or(config.paused_text.as_str())
             .to_string(),
     }
 }

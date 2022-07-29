@@ -12,11 +12,14 @@ pub struct Config {
     pub large_image: String,
     pub playing_image: String,
     pub paused_image: String,
+    pub large_text: String,
+    pub playing_text: String,
+    pub paused_text: String,
 }
 
 impl Config {
     pub fn new() -> Config {
-        let args_matches = args::get_args_app().get_matches();
+        let args_matches = args::args::get_args_app().get_matches();
         let parsed_config = match config_file::load() {
             Ok(config) => config,
             Err(e) => {
@@ -91,6 +94,30 @@ impl Config {
             } else {
                 parsed_config.paused_image
             },
+            large_text: if args_matches.is_present("large_text") {
+                args_matches
+                    .value_of("large_text")
+                    .unwrap()
+                    .to_string()
+            } else {
+                parsed_config.large_text
+            },
+            playing_text: if args_matches.is_present("playing_text") {
+                args_matches
+                    .value_of("playing_text")
+                    .unwrap()
+                    .to_string()
+            } else {
+                parsed_config.playing_text
+            },
+            paused_text: if args_matches.is_present("paused_text") {
+                args_matches
+                    .value_of("paused_text")
+                    .unwrap()
+                    .to_string()
+            } else {
+                parsed_config.paused_text
+            },
         };
 
         configs
@@ -113,6 +140,9 @@ impl Config {
             large_image: "cmus".to_string(),
             playing_image: "play_icon_2".to_string(),
             paused_image: "pause_icon_2".to_string(),
+            large_text: "cmus yoooo ".to_string(),
+            playing_text: "Playing ".to_string(),
+            paused_text: "Paused ".to_string(),
         }
     }
 }
