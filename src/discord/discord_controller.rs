@@ -60,7 +60,7 @@ impl DiscordController {
                 .buttons(buttons_vec.to_vec()),
         ) {
             Ok(_) => debugger.log("Activity updated"),
-            Err(e) => debugger.log_error(format!("Error updating activity: {}", e).as_str()),
+            Err(e) => debugger.log_error(&format!("Error updating activity: {}", e)),
         }
     }
 }

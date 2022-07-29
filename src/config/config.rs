@@ -140,14 +140,14 @@ impl Config {
         let config_path = format!(
             "{}/{}",
             dirs::config_dir().unwrap_or_default().to_str().unwrap(),
-            "cmus-rps-rs/Config.conf"
+            "cmus-rps-rs/config.conf"
         );
         Config {
             debug: false,
             link: false,
             config_path: config_path.to_string(),
             interval: 1, // seconds
-            sleep: 5,    // 5 seconds
+            sleep: 5 * 60,    // 5 minutes
             part_one_format: "%artist% - %title%".to_string(),
             part_two_format: "%album%".to_string(),
             large_image: "cmus".to_string(),
