@@ -3,7 +3,7 @@ pub struct Debugger {
 }
 
 impl Debugger {
-    fn new() -> Debugger {
+    pub(crate) fn new() -> Debugger {
         Debugger { debug: false }
     }
 
