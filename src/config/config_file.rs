@@ -68,7 +68,9 @@ pub fn create_default() -> Config {
         format!(
             "debug: {}\nlink: {}\nconfig_path: {}\ninterval: {}\nsleep: {}\npart_one_format: {}\n\
             part_two_format: {}\nlarge_image: {}\nplaying_image: {}\npaused_image: {}\n\
-            large_text: {}\nplaying_text: {}\npaused_text: {}\n",
+            large_text: {}\nplaying_text: {}\npaused_text: {}\n\
+            button_one_text: {}\nbutton_one_url: {}\n\
+            button_two_text: {}\nbutton_two_url: {}\n",
             config.debug,
             config.link,
             config.config_path,
@@ -81,8 +83,14 @@ pub fn create_default() -> Config {
             config.paused_image,
             config.large_text,
             config.playing_text,
-            config.paused_text
-        ).as_bytes()
-    ).unwrap();
+            config.paused_text,
+            config.button_one.0,
+            config.button_one.1,
+            config.button_two.0,
+            config.button_two.1,
+        )
+        .as_bytes(),
+    )
+    .unwrap();
     config
 }

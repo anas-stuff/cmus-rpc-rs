@@ -15,6 +15,8 @@ pub struct Config {
     pub large_text: String,
     pub playing_text: String,
     pub paused_text: String,
+    pub button_one: (String, String),
+    pub button_two: (String, String),
 }
 
 impl Config {
@@ -71,52 +73,58 @@ impl Config {
                 parsed_config.part_two_format
             },
             large_image: if args_matches.is_present("large_image") {
-                args_matches
-                    .value_of("large_image")
-                    .unwrap()
-                    .to_string()
+                args_matches.value_of("large_image").unwrap().to_string()
             } else {
                 parsed_config.large_image
             },
             playing_image: if args_matches.is_present("playing_image") {
-                args_matches
-                    .value_of("playing_image")
-                    .unwrap()
-                    .to_string()
+                args_matches.value_of("playing_image").unwrap().to_string()
             } else {
                 parsed_config.playing_image
             },
             paused_image: if args_matches.is_present("paused_image") {
-                args_matches
-                    .value_of("paused_image")
-                    .unwrap()
-                    .to_string()
+                args_matches.value_of("paused_image").unwrap().to_string()
             } else {
                 parsed_config.paused_image
             },
             large_text: if args_matches.is_present("large_text") {
-                args_matches
-                    .value_of("large_text")
-                    .unwrap()
-                    .to_string()
+                args_matches.value_of("large_text").unwrap().to_string()
             } else {
                 parsed_config.large_text
             },
             playing_text: if args_matches.is_present("playing_text") {
-                args_matches
-                    .value_of("playing_text")
-                    .unwrap()
-                    .to_string()
+                args_matches.value_of("playing_text").unwrap().to_string()
             } else {
                 parsed_config.playing_text
             },
             paused_text: if args_matches.is_present("paused_text") {
-                args_matches
-                    .value_of("paused_text")
-                    .unwrap()
-                    .to_string()
+                args_matches.value_of("paused_text").unwrap().to_string()
             } else {
                 parsed_config.paused_text
+            },
+            button_one: if args_matches.is_present("button_one_text") {
+                (
+                    args_matches
+                        .value_of("button_one_text")
+                        .unwrap()
+                        .to_string(),
+                    // TODO: Handle this better
+                    args_matches.value_of("button_one_url").unwrap().to_string(),
+                )
+            } else {
+                parsed_config.button_one
+            },
+            button_two: if args_matches.is_present("button_two_text") {
+                (
+                    args_matches
+                        .value_of("button_two_text")
+                        .unwrap()
+                        .to_string(),
+                    // TODO: Handle this better
+                    args_matches.value_of("button_two_url").unwrap().to_string(),
+                )
+            } else {
+                parsed_config.button_two
             },
         };
 
@@ -133,8 +141,8 @@ impl Config {
             debug: false,
             link: false,
             config_path: config_path.to_string(),
-            interval: 5, // seconds
-            sleep: 5 * 60, // 5 minutes
+            interval: 1, // seconds
+            sleep: 5,    // 5 seconds
             part_one_format: "%artist% - %title%".to_string(),
             part_two_format: "%album%".to_string(),
             large_image: "cmus".to_string(),
@@ -143,6 +151,19 @@ impl Config {
             large_text: "cmus yoooo ".to_string(),
             playing_text: "Playing ".to_string(),
             paused_text: "Paused ".to_string(),
+            button_one: (
+                "My Github".to_string(),
+                "https://github.com/anas-elgarhy".to_string(),
+            ),
+            button_two: ("".to_string(), "".to_string()),
         }
+    }
+
+    pub fn has_button_one(&self) -> bool {
+        self.button_one.0 != "" && self.button_one.1 != ""
+    }
+
+    pub fn has_button_two(&self) -> bool {
+        self.button_two.0 != "" && self.button_two.1 != ""
     }
 }

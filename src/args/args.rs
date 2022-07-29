@@ -71,5 +71,25 @@ pub fn get_args_app() -> App<'static> {
                 .alias("pat")
                 .help("Set custom paused text for presence")
                 .takes_value(true),
+            Arg::with_name("button_one_text")
+                .long("buttonOneText")
+                .alias("b1t")
+                .help("Set custom button one text for presence")
+                .takes_value(true),
+            Arg::with_name("button_one_url")
+                .long("buttonOneUrl")
+                .alias("b1u")
+                .help("Set custom button one url for presence")
+                .takes_value(true),
+            Arg::with_name("button_two_text")
+                .long("buttonTwoText")
+                .alias("b2t")
+                .help("Set custom button two text for presence")
+                .takes_value(true),
+            Arg::with_name("button_two_url")
+                .long("buttonTwoUrl")
+                .alias("b2u")
+                .help("Set custom button two url for presence")
+                .takes_value(true),
         ])
 }

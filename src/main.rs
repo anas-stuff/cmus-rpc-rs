@@ -2,10 +2,10 @@ use crate::config::config::Config;
 use crate::discord::discord_controller::DiscordController;
 
 mod args;
+mod cmus;
 mod config;
 mod debug;
 mod discord;
-mod cmus;
 
 fn main() {
     let _conf = Config::new();

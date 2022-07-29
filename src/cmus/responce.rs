@@ -37,7 +37,7 @@ impl Response {
                 let (tag, value) = line.split_once(" ").unwrap().1.split_once(" ").unwrap();
                 tags.insert(tag.to_string(), value.to_string());
             } else if line.starts_with("status") {
-                let (_ , value) = line.split_once(" ").unwrap();
+                let (_, value) = line.split_once(" ").unwrap();
                 state = match value {
                     "playing" => State::PLAYING,
                     "paused" => State::PAUSED,
@@ -63,7 +63,10 @@ impl Response {
     }
 
     pub fn title(&self) -> String {
-        self.tags.get("title").unwrap_or(&self.file_name()).to_string()
+        self.tags
+            .get("title")
+            .unwrap_or(&self.file_name())
+            .to_string()
     }
 
     pub fn file_name(&self) -> String {

@@ -1,8 +1,8 @@
-use discord_rich_presence::DiscordIpc;
 use crate::cmus;
 use crate::config::config;
 use crate::debug::debugger::Debugger;
 use crate::discord::formatter;
+use discord_rich_presence::DiscordIpc;
 
 pub struct DiscordController {
     started_time: i64,
@@ -28,13 +28,16 @@ impl DiscordController {
         controller
     }
 
-    pub fn update_presence(&mut self, cmus_response: cmus::responce::Response,
-                           debugger: &Debugger,
-                           configs: &config::Config) {
-
+    pub fn update_presence(
+        &mut self,
+        cmus_response: cmus::responce::Response,
+        debugger: &Debugger,
+        configs: &config::Config,
+        buttons_vec: &Vec<discord_rich_presence::activity::Button>,
+    ) {
         debugger.log("Updating presence");
 
-        if self.started_time == 0  {
+        if self.started_time == 0 {
             self.started_time = std::time::Instant::now().elapsed().as_millis() as i64;
         }
 
@@ -43,27 +46,25 @@ impl DiscordController {
         let part_2 = formatter::format(configs.part_two_format.as_str(), &cmus_response);
         debugger.log(format!("part_2: {}", part_2).as_str());
 
-        match self.drpc.set_activity(discord_rich_presence::activity::Activity::new()
-            .state(part_2.as_str())
-            .details(part_1.as_str())
-            .assets(
-                discord_rich_presence::activity::Assets::new()
-                .large_image(configs.large_image.as_str())
-                .large_text(configs.large_text.as_str())
-                .small_image(
-                    match cmus_response.state {
-                        cmus::responce::State::PLAYING => configs.playing_image.as_str(),
-                        _ => configs.playing_image.as_str(),
-                    }
+        match self.drpc.set_activity(
+            discord_rich_presence::activity::Activity::new()
+                .state(part_2.as_str())
+                .details(part_1.as_str())
+                .assets(
+                    discord_rich_presence::activity::Assets::new()
+                        .large_image(configs.large_image.as_str())
+                        .large_text(configs.large_text.as_str())
+                        .small_image(match cmus_response.state {
+                            cmus::responce::State::PLAYING => configs.playing_image.as_str(),
+                            _ => configs.playing_image.as_str(),
+                        })
+                        .small_text(match cmus_response.state {
+                            cmus::responce::State::PLAYING => configs.playing_text.as_str(),
+                            _ => configs.paused_text.as_str(),
+                        }),
                 )
-                .small_text(
-                    match cmus_response.state {
-                        cmus::responce::State::PLAYING => configs.playing_text.as_str(),
-                        _ => configs.paused_text.as_str(),
-                    }
-                )
-            )
-                ) {
+                .buttons(buttons_vec.to_vec()),
+        ) {
             Ok(_) => debugger.log("Activity updated"),
             Err(e) => debugger.log_error(format!("Error updating activity: {}", e).as_str()),
         }

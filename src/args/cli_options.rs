@@ -51,5 +51,21 @@ pub(crate) fn new(args_matches: clap::ArgMatches) -> Config {
             .value_of("paused_text")
             .unwrap_or(config.paused_text.as_str())
             .to_string(),
+        button_one: (
+            args_matches
+                .value_of("button_one_text")
+                .unwrap_or(config.button_one.0.as_str()).parse().unwrap(),
+            args_matches
+                .value_of("button_one_url")
+                .unwrap_or(config.button_one.1.as_str()).parse().unwrap()
+        ),
+        button_two: (
+            args_matches
+                .value_of("button_two_text")
+                .unwrap_or(config.button_two.0.as_str()).parse().unwrap(),
+            args_matches
+                .value_of("button_two_url")
+                .unwrap_or(config.button_two.1.as_str()).parse().unwrap()
+        ),
     }
 }
