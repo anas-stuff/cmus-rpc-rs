@@ -1,56 +1,85 @@
 use crate::config::config::Config;
 use std::io::Write;
 
-pub fn load() -> std::io::Result<Config> {
+pub fn load(config_file_path: String) -> std::io::Result<Config> {
     let mut config: Config = Config::default();
-    let file_contents = std::fs::read_to_string(&config.config_path)?;
+    let file_contents = std::fs::read_to_string(config_file_path)?;
 
     for line in file_contents.lines() {
-        match line {
-            "debug:" => {
+        println!("{}", line);
+        match line.split_once(":").unwrap().0 {
+            "debug" => {
                 config.debug = line
-                    .split(":")
-                    .nth(1)
+                    .split_once(":")
                     .unwrap()
+                    .1
                     .to_lowercase()
                     .trim()
                     .eq("true");
             }
-            "link:" => {
+            "link" => {
                 config.link = line
-                    .split(":")
-                    .nth(1)
+                    .split_once(":")
                     .unwrap()
+                    .1
                     .to_lowercase()
                     .trim()
                     .eq("true");
             }
-            "config_path:" => {
+            "config_path" => {
                 config.config_path = line.split(":").nth(1).unwrap().trim().to_string();
             }
-            "interval:" => {
+            "interval" => {
                 config.interval = line
-                    .split(":")
-                    .nth(1)
+                    .split_once(":")
                     .unwrap()
+                    .1
                     .trim()
                     .parse::<u32>()
                     .unwrap();
             }
-            "sleep:" => {
+            "sleep" => {
                 config.sleep = line
-                    .split(":")
-                    .nth(1)
+                    .split_once(":")
                     .unwrap()
+                    .1
                     .trim()
                     .parse::<u32>()
                     .unwrap();
             }
-            "part_one_format:" => {
-                config.part_one_format = line.split(":").nth(1).unwrap().trim().to_string();
+            "part_one_format" => {
+                config.part_one_format = line.split_once(":").unwrap().1.trim().to_string()
             }
-            "part_two_format:" => {
-                config.part_two_format = line.split(":").nth(1).unwrap().trim().to_string();
+            "part_two_format" => {
+                config.part_two_format = line.split_once(":").unwrap().1.trim().to_string()
+            }
+            "large_image" => {
+                config.large_image = line.split_once(":").unwrap().1.trim().to_string()
+            }
+            "playing_image" => {
+                config.playing_image = line.split_once(":").unwrap().1.trim().to_string()
+            }
+            "paused_image" => {
+                config.paused_image = line.split_once(":").unwrap().1.trim().to_string()
+            }
+            "large_text" => config.large_text = line.split_once(":").unwrap().1.trim().to_string(),
+            "playing_text" => {
+                config.playing_text = line.split_once(":").unwrap().1.trim().to_string()
+            }
+            "paused_text" => {
+                config.paused_text = line.split_once(":").unwrap().1.trim().to_string()
+            }
+            "button_one_text" => {
+                config.button_one.0 = line.split_once(":").unwrap().1.trim().to_string()
+            }
+            "button_one_url" => {
+                config.button_one.1 = line.split_once(":").unwrap().1.trim().to_string()
+            }
+            "button_two_text" => {
+                config.button_two.0 = line.split_once(":").unwrap().1.trim().to_string()
+            }
+            "button_two_url" => {
+                config.button_two.1 = line.split_once(":").unwrap().1.trim().to_string()
             }
             _ => {}
         };

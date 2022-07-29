@@ -54,18 +54,26 @@ pub(crate) fn new(args_matches: clap::ArgMatches) -> Config {
         button_one: (
             args_matches
                 .value_of("button_one_text")
-                .unwrap_or(config.button_one.0.as_str()).parse().unwrap(),
+                .unwrap_or(config.button_one.0.as_str())
+                .parse()
+                .unwrap(),
             args_matches
                 .value_of("button_one_url")
-                .unwrap_or(config.button_one.1.as_str()).parse().unwrap()
+                .unwrap_or(config.button_one.1.as_str())
+                .parse()
+                .unwrap(),
         ),
         button_two: (
             args_matches
                 .value_of("button_two_text")
-                .unwrap_or(config.button_two.0.as_str()).parse().unwrap(),
+                .unwrap_or(config.button_two.0.as_str())
+                .parse()
+                .unwrap(),
             args_matches
                 .value_of("button_two_url")
-                .unwrap_or(config.button_two.1.as_str()).parse().unwrap()
+                .unwrap_or(config.button_two.1.as_str())
+                .parse()
+                .unwrap(),
         ),
     }
 }

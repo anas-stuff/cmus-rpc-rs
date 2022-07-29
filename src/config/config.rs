@@ -22,7 +22,12 @@ pub struct Config {
 impl Config {
     pub fn new() -> Config {
         let args_matches = args::args::get_args_app().get_matches();
-        let parsed_config = match config_file::load() {
+        let parsed_config = match config_file::load(
+            args_matches
+                .value_of("config_path")
+                .unwrap_or(Config::default().config_path.as_str())
+                .to_string(),
+        ) {
             Ok(config) => config,
             Err(e) => {
                 println!("Error loading config_path file: {}", e);
@@ -165,5 +170,29 @@ impl Config {
 
     pub fn has_button_two(&self) -> bool {
         self.button_two.0 != "" && self.button_two.1 != ""
+    }
+
+    pub fn to_string(&self) -> String {
+        let mut str = String::new();
+
+        str.push_str(&format!("debug: {}\n", self.debug));
+        str.push_str(&format!("link: {}\n", self.link));
+        str.push_str(&format!("config_path: {}\n", self.config_path));
+        str.push_str(&format!("interval: {}\n", self.interval));
+        str.push_str(&format!("sleep: {}\n", self.sleep));
+        str.push_str(&format!("part_one_format: {}\n", self.part_one_format));
+        str.push_str(&format!("part_two_format: {}\n", self.part_two_format));
+        str.push_str(&format!("large_image: {}\n", self.large_image));
+        str.push_str(&format!("playing_image: {}\n", self.playing_image));
+        str.push_str(&format!("paused_image: {}\n", self.paused_image));
+        str.push_str(&format!("large_text: {}\n", self.large_text));
+        str.push_str(&format!("playing_text: {}\n", self.playing_text));
+        str.push_str(&format!("paused_text: {}\n", self.paused_text));
+        str.push_str(&format!("button_one_text: {}\n", self.button_one.0));
+        str.push_str(&format!("button_one_url: {}\n", self.button_one.1));
+        str.push_str(&format!("button_two_text: {}\n", self.button_two.0));
+        str.push_str(&format!("button_two_url: {}\n", self.button_two.1));
+
+        str
     }
 }

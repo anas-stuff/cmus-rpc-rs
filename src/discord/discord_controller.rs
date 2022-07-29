@@ -5,14 +5,12 @@ use crate::discord::formatter;
 use discord_rich_presence::DiscordIpc;
 
 pub struct DiscordController {
-    started_time: i64,
     drpc: discord_rich_presence::DiscordIpcClient,
 }
 
 impl DiscordController {
     pub fn new(app_id: &str, debugger: &Debugger) -> DiscordController {
         let mut controller = DiscordController {
-            started_time: 0,
             drpc: discord_rich_presence::DiscordIpcClient::new(app_id).unwrap(),
         };
 
@@ -36,10 +34,6 @@ impl DiscordController {
         buttons_vec: &Vec<discord_rich_presence::activity::Button>,
     ) {
         debugger.log("Updating presence");
-
-        if self.started_time == 0 {
-            self.started_time = std::time::Instant::now().elapsed().as_millis() as i64;
-        }
 
         let part_1 = formatter::format(configs.part_one_format.as_str(), &cmus_response);
         debugger.log(format!("part_1: {}", part_1).as_str());
