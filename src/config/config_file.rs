@@ -66,14 +66,18 @@ pub fn create_default() -> Config {
     let mut file = std::fs::File::create(&config.config_path).unwrap();
     file.write_all(
         format!(
-            "debug: {}\nlink: {}\nconfig_path: {}\ninterval: {}\nsleep: {}\npart_one_format: {}\npart_two_format: {}",
+            "debug: {}\nlink: {}\nconfig_path: {}\ninterval: {}\nsleep: {}\npart_one_format: {}\n\
+            part_two_format: {}\nlarge_image: {}\nplaying_image: {}\npaused_image: {}\n",
             config.debug,
             config.link,
             config.config_path,
             config.interval,
             config.sleep,
             config.part_one_format,
-            config.part_two_format
+            config.part_two_format,
+            config.large_image,
+            config.playing_image,
+            config.paused_image
         ).as_bytes()
     ).unwrap();
     config

@@ -8,6 +8,6 @@ license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-discord-presence = "0.5.5"
+discord-rpc-client = "0.3.0"
 clap = "3.2.12"
 dirs = "4.0.0"

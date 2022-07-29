@@ -1,5 +1,5 @@
 use crate::config::config::Config;
-use crate::discord::DiscordController::DiscordController;
+use crate::discord::discord_controller::DiscordController;
 
 mod args;
 mod config;
@@ -9,6 +9,8 @@ mod cmus;
 
 fn main() {
     let _conf = Config::new();
-    DiscordController::new(961407969986232380, debug::debugger::Debugger::new());
-    std::thread::sleep(std::time::Duration::from_secs(20));
+    let mut debugger = debug::debugger::Debugger::new();
+    debugger.set_debug(_conf.debug);
+    let mut discord_controller = DiscordController::new(961407969986232380, &debugger);
+    cmus::tracker::run(&_conf, &debugger, &mut discord_controller);
 }

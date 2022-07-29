@@ -32,5 +32,17 @@ pub(crate) fn new(args_matches: clap::ArgMatches) -> Config {
             .value_of("part_two_format")
             .unwrap_or("{album}")
             .to_string(),
+        large_image: args_matches
+            .value_of("large_image")
+            .unwrap_or("cmus")
+            .to_string(),
+        playing_image: args_matches
+            .value_of("playing_image")
+            .unwrap_or("play_icon_2")
+            .to_string(),
+        paused_image: args_matches
+            .value_of("paused_image")
+            .unwrap_or("pause_icon_2")
+            .to_string(),
     }
 }

@@ -1,1 +1,2 @@
-pub(crate) mod DiscordController;
+pub(crate) mod discord_controller;
+mod formatter;

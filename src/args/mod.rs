@@ -43,5 +43,20 @@ pub fn get_args_app() -> App<'static> {
                 .alias("p2f")
                 .help("Set custom format for part two of presence")
                 .takes_value(true),
+            Arg::with_name("large_image")
+                .long("largeImage")
+                .alias("li")
+                .help("Set custom large image for presence")
+                .takes_value(true),
+            Arg::with_name("playing_image")
+                .long("playingImage")
+                .alias("pi")
+                .help("Set custom playing image for presence")
+                .takes_value(true),
+            Arg::with_name("paused_image")
+                .long("pausedImage")
+                .alias("pai")
+                .help("Set custom paused image for presence")
+                .takes_value(true),
         ])
 }

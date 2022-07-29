@@ -9,6 +9,9 @@ pub struct Config {
     pub sleep: u32,
     pub part_one_format: String,
     pub part_two_format: String,
+    pub large_image: String,
+    pub playing_image: String,
+    pub paused_image: String,
 }
 
 impl Config {
@@ -64,6 +67,30 @@ impl Config {
             } else {
                 parsed_config.part_two_format
             },
+            large_image: if args_matches.is_present("large_image") {
+                args_matches
+                    .value_of("large_image")
+                    .unwrap()
+                    .to_string()
+            } else {
+                parsed_config.large_image
+            },
+            playing_image: if args_matches.is_present("playing_image") {
+                args_matches
+                    .value_of("playing_image")
+                    .unwrap()
+                    .to_string()
+            } else {
+                parsed_config.playing_image
+            },
+            paused_image: if args_matches.is_present("paused_image") {
+                args_matches
+                    .value_of("paused_image")
+                    .unwrap()
+                    .to_string()
+            } else {
+                parsed_config.paused_image
+            },
         };
 
         configs
@@ -79,10 +106,13 @@ impl Config {
             debug: false,
             link: false,
             config_path: config_path.to_string(),
-            interval: 1000,
-            sleep: 5000,
-            part_one_format: "{artist} - {title}".to_string(),
-            part_two_format: "{album}".to_string(),
+            interval: 5, // seconds
+            sleep: 5 * 60, // 5 minutes
+            part_one_format: "%artist% - %title%".to_string(),
+            part_two_format: "%album%".to_string(),
+            large_image: "cmus".to_string(),
+            playing_image: "play_icon_2".to_string(),
+            paused_image: "pause_icon_2".to_string(),
         }
     }
 }
