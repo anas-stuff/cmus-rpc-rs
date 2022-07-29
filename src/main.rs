@@ -8,12 +8,10 @@ mod debug;
 mod discord;
 
 fn main() {
-    let _conf = Config::new();
+    let conf = Config::new();
     let mut debugger = debug::debugger::Debugger::new();
-    debugger.set_debug(_conf.debug);
-
-    debugger.log(format!("{}", _conf.to_string()).as_str());
+    debugger.set_debug(conf.debug);
 
     let mut discord_controller = DiscordController::new("961407969986232380", &debugger);
-    cmus::tracker::run(&_conf, &debugger, &mut discord_controller);
+    cmus::tracker::run(&conf, &debugger, &mut discord_controller);
 }
