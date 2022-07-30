@@ -1,3 +1,4 @@
+use std::borrow::Borrow;
 use crate::cmus;
 use crate::config::config;
 use crate::debug::debugger::Debugger;
@@ -5,12 +6,14 @@ use crate::discord::formatter;
 use discord_rich_presence::DiscordIpc;
 
 pub struct DiscordController {
+    sleep_time: u64,
     drpc: discord_rich_presence::DiscordIpcClient,
 }
 
 impl DiscordController {
     pub fn new(app_id: &str, debugger: &Debugger) -> DiscordController {
         let mut controller = DiscordController {
+            sleep_time: 0,
             drpc: discord_rich_presence::DiscordIpcClient::new(app_id).unwrap(),
         };
 
@@ -40,8 +43,7 @@ impl DiscordController {
         let part_2 = formatter::format(configs.part_two_format.as_str(), &cmus_response);
         debugger.log(format!("part_2: {}", part_2).as_str());
 
-        match self.drpc.set_activity(
-            discord_rich_presence::activity::Activity::new()
+        let activity = discord_rich_presence::activity::Activity::new()
                 .state(part_2.as_str())
                 .details(part_1.as_str())
                 .assets(
@@ -57,10 +59,19 @@ impl DiscordController {
                             _ => configs.paused_text.as_str(),
                         }),
                 )
-                .buttons(buttons_vec.to_vec()),
-        ) {
-            Ok(_) => debugger.log("Activity updated"),
-            Err(e) => debugger.log_error(&format!("Error updating activity: {}", e)),
+                .buttons(buttons_vec.to_vec());
+
+        for _ in 0..3 {
+            match self.drpc.set_activity(activity.clone()) {
+                Ok(_) => debugger.log("Activity updated"),
+                Err(e) => {
+                    debugger.log_error(&format!("Error updating activity: {}", e));
+                    match self.drpc.reconnect() {
+                        Ok(_) => debugger.log("Reconnected successfully"),
+                        Err(_) => debugger.log_error("Failed to reconnect"),
+                    }
+                },
+            }
         }
     }
 }
