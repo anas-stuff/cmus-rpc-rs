@@ -12,9 +12,9 @@ fn main() {
     let mut debugger = debug::debugger::Debugger::new();
     debugger.set_debug(conf.debug);
 
-    let mut sleep_time_mutex = std::sync::Arc::new(std::sync::Mutex::new(0u32));
+    let mut sleep_time_arc = std::sync::Arc::new(std::sync::Mutex::new(0u32));
 
-    let time = std::sync::Arc::clone(&sleep_time_mutex);
+    let time = std::sync::Arc::clone(&sleep_time_arc);
     std::thread::spawn(move || {
         // Increment sleep_time_mutex every second
         loop {
@@ -25,5 +25,5 @@ fn main() {
     });
 
     let mut discord_controller = DiscordController::new("961407969986232380", &debugger);
-    cmus::tracker::run(&conf, &debugger, &mut discord_controller, &mut sleep_time_mutex);
+    cmus::tracker::run(&conf, &debugger, &mut discord_controller, &mut sleep_time_arc);
 }

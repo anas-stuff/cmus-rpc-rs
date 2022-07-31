@@ -7,7 +7,7 @@ pub fn run(
     configs: &Config,
     debugger: &debugger::Debugger,
     discord_controller: &mut discord_controller::DiscordController,
-    sleep_time_mutix: &mut std::sync::Arc<std::sync::Mutex<u32>>
+    sleep_time_arc: &mut std::sync::Arc<std::sync::Mutex<u32>>
 ) {
     debugger.log("Starting cmus tracker");
 
@@ -54,10 +54,10 @@ pub fn run(
                 );
                 debugger.log("Updated presence");
                 // Reset the sleep timer
-                *sleep_time_mutix.lock().unwrap() = 0;
+                *sleep_time_arc.lock().unwrap() = 0;
             },
             _ => {
-                if *sleep_time_mutix.lock().unwrap() > configs.sleep {
+                if *sleep_time_arc.lock().unwrap() > configs.sleep {
                     // Remove the presence
                     match discord_controller.remove_activity() {
                         Ok(_) => debugger.log("Stopped RPC"),
