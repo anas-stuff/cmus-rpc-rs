@@ -52,9 +52,9 @@
 | `-s` or `--sleep`            | Set sleep when there is no activity                          | sleep time (seconds)                                                                      |
 | `--p1f` or `--partOneFormat` | Set the format for the first part                            | Format for first part                                                                     |
 | `--p2f` or `--partTowFormat` | Set the format for the second part                           | Format for second part                                                                    |
-| `--li` or `--largeImage`     | Set custom large image for presence                          | large imgae name [Available images for defult app]()                                      |
-| `--pi` or `--playingImage`   | Set custom playing image for presence                        | playing icon name [Available playing images for defult app]()                             |
-| `--pai` or `--pausedImage`   | Set custom paused image for presence                         | paused icon name [Available icons]()                                                      |
+| `--li` or `--largeImage`     | Set custom large image(cover) for presence                   | large imgae name [Available images for defult app](./assets/cover/)                       |
+| `--pi` or `--playingImage`   | Set custom playing image for presence                        | playing icon name [Available playing images for defult app](./assets/play_icons/)         |
+| `--pai` or `--pausedImage`   | Set custom paused image for presence                         | paused icon name [Available icons](./assets/pause_icons/)                                 |
 | `--pt` or `--playingText`    | Set custom playing icon alt for presence                     | playing icon alt text                                                                     |
 | `--pat` or `--pausedText`    | Set custom paused icon altarnative for presence              | paused icon alt text                                                                      |
 | `--b1t` or `--buttonOneText` | Set button one text(label)                                   | button one label (if empty and no has value in the config file the button will be hidden) |
