@@ -1,7 +1,7 @@
 use crate::config::config::Config;
 
 pub(crate) fn new(args_matches: clap::ArgMatches) -> Config {
-    let mut config: Config = Config::default();
+    let config: Config = Config::default();
     Config {
         debug: args_matches.is_present("debug"),
         link: args_matches.is_present("link"),

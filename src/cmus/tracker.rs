@@ -1,12 +1,16 @@
+use std::ops::Deref;
 use crate::cmus::responce::Response;
 use crate::debug::debugger;
-use crate::{discord::discord_controller, Config};
+use crate::{discord::discord_controller, Config, cmus};
 
 pub fn run(
     configs: &Config,
     debugger: &debugger::Debugger,
     discord_controller: &mut discord_controller::DiscordController,
+    sleep_time_mutix: &mut std::sync::Arc<std::sync::Mutex<u32>>
 ) {
+    debugger.log("Starting cmus tracker");
+
     let mut buttons_vec = Vec::new();
 
     if configs.has_button_one() {
@@ -39,13 +43,31 @@ pub fn run(
 
         let cmus_response = String::from_utf8_lossy(&out.stdout).to_string();
         debugger.log(&cmus_response);
-        discord_controller.update_presence(
-            Response::new(cmus_response),
-            debugger,
-            configs,
-            &buttons_vec,
-        );
-        debugger.log("Updated presence");
+        let paserd_response = Response::new(cmus_response);
+        match paserd_response.state {
+            cmus::responce::State::PLAYING => {
+                discord_controller.update_presence(
+                    paserd_response,
+                    debugger,
+                    configs,
+                    &buttons_vec,
+                );
+                debugger.log("Updated presence");
+                // Reset the sleep timer
+                *sleep_time_mutix.lock().unwrap() = 0;
+            },
+            _ => {
+                if *sleep_time_mutix.lock().unwrap() > configs.sleep {
+                    // Remove the presence
+                    match discord_controller.remove_activity() {
+                        Ok(_) => debugger.log("Stopped RPC"),
+                        Err(e) => {
+                            debugger.log_error(&format!("Failed to stop RPC: {}", e));
+                        }
+                    }
+                }
+            },
+        }
         std::thread::sleep(std::time::Duration::from_secs(configs.interval as u64));
         debugger.log(format!("Sleeping for {} seconds.", &configs.interval.to_string()).as_str());
     }

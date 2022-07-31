@@ -1,4 +1,4 @@
-use std::borrow::Borrow;
+use std::error::Error;
 use crate::cmus;
 use crate::config::config;
 use crate::debug::debugger::Debugger;
@@ -6,14 +6,12 @@ use crate::discord::formatter;
 use discord_rich_presence::DiscordIpc;
 
 pub struct DiscordController {
-    sleep_time: u64,
     drpc: discord_rich_presence::DiscordIpcClient,
 }
 
 impl DiscordController {
     pub fn new(app_id: &str, debugger: &Debugger) -> DiscordController {
         let mut controller = DiscordController {
-            sleep_time: 0,
             drpc: discord_rich_presence::DiscordIpcClient::new(app_id).unwrap(),
         };
 
@@ -68,10 +66,14 @@ impl DiscordController {
                     debugger.log_error(&format!("Error updating activity: {}", e));
                     match self.drpc.reconnect() {
                         Ok(_) => debugger.log("Reconnected successfully"),
-                        Err(_) => debugger.log_error("Failed to reconnect"),
+                        Err(e) => debugger.log_error(&format!("Failed to reconnect to Discord: {}", e)),
                     }
                 },
             }
         }
+    }
+
+    pub fn remove_activity(&mut self) -> Result<(), Box<dyn Error>> {
+        self.drpc.close()
     }
 }
