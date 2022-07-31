@@ -1,4 +1,4 @@
-use std::ops::Deref;
+
 use crate::cmus::responce::Response;
 use crate::debug::debugger;
 use crate::{discord::discord_controller, Config, cmus};
