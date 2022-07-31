@@ -1,9 +1,9 @@
-use std::error::Error;
 use crate::cmus;
 use crate::config::config;
 use crate::debug::debugger::Debugger;
 use crate::discord::formatter;
 use discord_rich_presence::DiscordIpc;
+use std::error::Error;
 
 pub struct DiscordController {
     drpc: discord_rich_presence::DiscordIpcClient,
@@ -42,22 +42,22 @@ impl DiscordController {
         debugger.log(format!("part_2: {}", part_2).as_str());
 
         let activity = discord_rich_presence::activity::Activity::new()
-                .state(part_2.as_str())
-                .details(part_1.as_str())
-                .assets(
-                    discord_rich_presence::activity::Assets::new()
-                        .large_image(configs.large_image.as_str())
-                        .large_text(configs.large_text.as_str())
-                        .small_image(match cmus_response.state {
-                            cmus::responce::State::PLAYING => configs.playing_image.as_str(),
-                            _ => configs.playing_image.as_str(),
-                        })
-                        .small_text(match cmus_response.state {
-                            cmus::responce::State::PLAYING => configs.playing_text.as_str(),
-                            _ => configs.paused_text.as_str(),
-                        }),
-                )
-                .buttons(buttons_vec.to_vec());
+            .state(part_2.as_str())
+            .details(part_1.as_str())
+            .assets(
+                discord_rich_presence::activity::Assets::new()
+                    .large_image(configs.large_image.as_str())
+                    .large_text(configs.large_text.as_str())
+                    .small_image(match cmus_response.state {
+                        cmus::responce::State::PLAYING => configs.playing_image.as_str(),
+                        _ => configs.playing_image.as_str(),
+                    })
+                    .small_text(match cmus_response.state {
+                        cmus::responce::State::PLAYING => configs.playing_text.as_str(),
+                        _ => configs.paused_text.as_str(),
+                    }),
+            )
+            .buttons(buttons_vec.to_vec());
 
         for _ in 0..3 {
             match self.drpc.set_activity(activity.clone()) {
@@ -66,9 +66,11 @@ impl DiscordController {
                     debugger.log_error(&format!("Error updating activity: {}", e));
                     match self.drpc.reconnect() {
                         Ok(_) => debugger.log("Reconnected successfully"),
-                        Err(e) => debugger.log_error(&format!("Failed to reconnect to Discord: {}", e)),
+                        Err(e) => {
+                            debugger.log_error(&format!("Failed to reconnect to Discord: {}", e))
+                        }
                     }
-                },
+                }
             }
         }
     }

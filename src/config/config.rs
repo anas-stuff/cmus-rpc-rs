@@ -146,8 +146,8 @@ impl Config {
             debug: false,
             link: false,
             config_path: config_path.to_string(),
-            interval: 1, // seconds
-            sleep: 5 * 60,    // 5 minutes
+            interval: 1,   // seconds
+            sleep: 5 * 60, // 5 minutes
             part_one_format: "%artist% - %title%".to_string(),
             part_two_format: "%album%".to_string(),
             large_image: "cmus".to_string(),
