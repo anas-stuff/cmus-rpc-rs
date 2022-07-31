@@ -102,4 +102,6 @@ cmus-rpc-rs --p1f "Anas listening to %title%" --p2f "From %artist%"
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=anas-elgarhy_cmus-rpc-rs)
 
+> This is my first project useing rust 😆, support me with star yoo 💙🦀
+
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://spdx.org/licenses/MIT.html)
