@@ -50,7 +50,7 @@ impl DiscordController {
                     .large_text(configs.large_text.as_str())
                     .small_image(match cmus_response.state {
                         cmus::responce::State::PLAYING => configs.playing_image.as_str(),
-                        _ => configs.playing_image.as_str(),
+                        _ => configs.paused_image.as_str(),
                     })
                     .small_text(match cmus_response.state {
                         cmus::responce::State::PLAYING => configs.playing_text.as_str(),
