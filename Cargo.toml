@@ -4,6 +4,29 @@ authors = ["anas-elgarhy"]
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
+description = "A Discord Rich Presence for cmus player using rust 🦀💙"
+include = [
+    "src/**/*",
+    "Cargo.toml",
+    "LICENSE",
+    "README.md",
+]
+repository = "https://github.com/anas-elgarhy/cmus-rpc-rs"
+homepage = "https://github.com/anas-elgarhy/cmus-rpc-rs"
+keywords = [
+    "cmus",
+    "rpc",
+    "discord-rpc",
+    "discord-rich-presence",
+    "cmus-rpc",
+    "cmus-rich-presence",
+]
+categories = [
+    "discord",
+    "music",
+    "rich-presence",
+    "command-line-interface",
+]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
