@@ -24,11 +24,10 @@ fn main() {
         }
     });
 
-    let mut discord_controller = DiscordController::new("961407969986232380", &debugger);
     cmus::tracker::run(
         &conf,
         &debugger,
-        &mut discord_controller,
+        &mut DiscordController::new("961407969986232380", &debugger),
         &mut sleep_time_arc,
     );
 }

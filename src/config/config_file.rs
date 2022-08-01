@@ -5,8 +5,8 @@ pub fn load(config_file_path: String) -> std::io::Result<Config> {
     let mut config: Config = Config::default();
     let file_contents = std::fs::read_to_string(config_file_path)?;
 
+    // Parse the config file
     for line in file_contents.lines() {
-        println!("{}", line);
         match line.split_once(":").unwrap().0 {
             "debug" => {
                 config.debug = line
@@ -93,7 +93,7 @@ pub fn create_default() -> Config {
     std::fs::create_dir_all(std::path::Path::new(&config.config_path).parent().unwrap()).unwrap();
 
     let mut file = std::fs::File::create(&config.config_path).unwrap();
-    file.write_all(
+    match file.write_all(
         format!(
             "debug: {}\nlink: {}\nconfig_path: {}\ninterval: {}\nsleep: {}\npart_one_format: {}\n\
             part_two_format: {}\nlarge_image: {}\nplaying_image: {}\npaused_image: {}\n\
@@ -119,7 +119,9 @@ pub fn create_default() -> Config {
             config.button_two.1,
         )
         .as_bytes(),
-    )
-    .unwrap();
+        ) {
+            Ok(_) => (),
+            Err(e) => println!("Error writing config file: {}", e),
+        };
     config
 }

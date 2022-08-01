@@ -157,8 +157,8 @@ impl Config {
             playing_text: "Playing ".to_string(),
             paused_text: "Paused ".to_string(),
             button_one: (
-                "My Github".to_string(),
-                "https://github.com/anas-elgarhy".to_string(),
+                "On github 😆".to_string(),
+                "https://github.com/anas-elgarhy/cmus-rps-rs".to_string(),
             ),
             button_two: ("".to_string(), "".to_string()),
         }
