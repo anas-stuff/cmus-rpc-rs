@@ -16,8 +16,6 @@ homepage = "https://github.com/anas-elgarhy/cmus-rpc-rs"
 keywords = [
     "cmus",
     "rpc",
-    "discord-rpc",
-    "discord-rich-presence",
     "cmus-rpc",
     "cmus-rich-presence",
 ]
