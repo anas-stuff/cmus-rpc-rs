@@ -2,7 +2,7 @@ use clap::{App, Arg};
 
 pub fn get_args_app() -> App<'static> {
     App::new("cmus-rpc-rs")
-        .version("0.1.1")
+        .version("0.1.2")
         .author("Anas Elgarhy <anas.elgarhy.dev@gmail.com>")
         .about("A Discord Rich Presence for cmus player")
         .args(&[
