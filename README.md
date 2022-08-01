@@ -1,15 +1,6 @@
 # A Discord Rich Presence for cmus player with 🦀
 
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=anas-elgarhy_cmus-rpc-rs&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Anas-Elgarhy_cmus-rpc)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=anas-elgarhy_cmus-rpc-rs&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Anas-Elgarhy_cmus-rpc)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=anas-elgarhy_cmus-rpc-rs&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=Anas-Elgarhy_cmus-rpc)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=anas-elgarhy_cmus-rpc-rs&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Anas-Elgarhy_cmus-rpc)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=anas-elgarhy_cmus-rpc-rs&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Anas-Elgarhy_cmus-rpc)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=anas-elgarhy_cmus-rpc-rs&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Anas-Elgarhy_cmus-rpc)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=anas-elgarhy_cmus-rpc-rs&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Anas-Elgarhy_cmus-rpc)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=anas-elgarhy_cmus-rpc-rs&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Anas-Elgarhy_cmus-rpc)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=anas-elgarhy_cmus-rpc-rs&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Anas-Elgarhy_cmus-rpc)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=anas-elgarhy_cmus-rpc-rs&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Anas-Elgarhy_cmus-rpc)
+[![crates.io](https://img.shields.io/crates/v/cmus-rpc-rs?style=for-the-badge)](https://crates.io/crates/cmus-rpc-rs)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3e0d24aa2c1441e484622b8540193cdf)](https://app.codacy.com/gh/anas-elgarhy/cmus-rpc-rs?utm_source=github.com&utm_medium=referral&utm_content=Anas-Elgarhy/cmus-rpc&utm_campaign=Badge_Grade_Settings)
 [![CodeFactor](https://www.codefactor.io/repository/github/anas-elgarhy/cmus-rpc-rs/badge)](https://www.codefactor.io/repository/github/anas-elgarhy/cmus-rpc)
 
@@ -18,26 +9,34 @@
 
 - Require cmus
 
-<!--
 ## Install
 
+- from crates.io
+    ```bash
+    crago install cmus-rpc-rs 
+    ```
+<!--
+
 ### Linux
+
 - From aur: `yay -S cmus-rpc-rs-rs`
 - Manual:
   - Make sure you installed `wget`
   - Run this command
-     ```bash
-      curl -s https://raw.githubusercontent.com/anas-elgarhy/cmus-rpc-rs/master/scripts/install.sh | sudo bash
-     ```
+    ```bash
+     curl -s https://raw.githubusercontent.com/anas-elgarhy/cmus-rpc-rs/master/scripts/install.sh | sudo bash
+    ```
 
 ## Uninstall
 
 ### Linux
+
 - Manual:
   - Run this command
-    ```bash
+    ````bash
       curl -s https://raw.githubusercontent.com/anas-elgarhy/cmus-rpc-rs/master/scripts/uninstall.sh | sudo bash
     ``` -->
+
 
 ### Options:
 
