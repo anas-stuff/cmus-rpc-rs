@@ -20,9 +20,6 @@ keywords = [
     "cmus-rich-presence",
 ]
 categories = [
-    "discord",
-    "music",
-    "rich-presence",
     "command-line-interface",
 ]
 
