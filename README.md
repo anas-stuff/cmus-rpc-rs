@@ -15,27 +15,7 @@
     ```bash
     crago install cmus-rpc-rs 
     ```
-<!--
-
-### Linux
-
 - From aur: `yay -S cmus-rpc-rs-rs`
-- Manual:
-  - Make sure you installed `wget`
-  - Run this command
-    ```bash
-     curl -s https://raw.githubusercontent.com/anas-elgarhy/cmus-rpc-rs/master/scripts/install.sh | sudo bash
-    ```
-
-## Uninstall
-
-### Linux
-
-- Manual:
-  - Run this command
-    ````bash
-      curl -s https://raw.githubusercontent.com/anas-elgarhy/cmus-rpc-rs/master/scripts/uninstall.sh | sudo bash
-    ``` -->
 
 
 ### Options:
