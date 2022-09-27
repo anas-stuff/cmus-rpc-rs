@@ -15,7 +15,7 @@
     ```bash
     crago install cmus-rpc-rs 
     ```
-- From aur: `yay -S cmus-rpc-rs-rs`
+- From aur: `yay -S cmus-rpc-rs`
 
 
 ### Options:
