@@ -4,8 +4,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3e0d24aa2c1441e484622b8540193cdf)](https://app.codacy.com/gh/anas-elgarhy/cmus-rpc-rs?utm_source=github.com&utm_medium=referral&utm_content=Anas-Elgarhy/cmus-rpc&utm_campaign=Badge_Grade_Settings)
 [![CodeFactor](https://www.codefactor.io/repository/github/anas-elgarhy/cmus-rpc-rs/badge)](https://www.codefactor.io/repository/github/anas-elgarhy/cmus-rpc)
 
-<img alt="image 1" src="./Screenshots/1_0.1.0.png">
-<img alt="image 2" src="./Screenshots/2_0.1.0.png">
+<img alt="image 1" src="../Screenshots/1_0.1.0.png">
+<img alt="image 2" src="../Screenshots/2_0.1.0.png">
 
 - 必要とする cmus
 
@@ -13,7 +13,7 @@
 
 - から crates.io
     ```bash
-    crago install cmus-rpc-rs 
+    cargo install cmus-rpc-rs 
     ```
 - から Arch User Repository(AUR): `yay -S cmus-rpc-rs`
 
