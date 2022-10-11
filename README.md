@@ -13,16 +13,16 @@
 
 - from crates.io
     ```bash
-    crago install cmus-rpc-rs 
+    cargo install cmus-rpc-rs 
     ```
-- From aur: `yay -S cmus-rpc-rs`
+- From Arch User Repository(AUR): `yay -S cmus-rpc-rs`
 
 
 ### Options:
 
 | Option                       | Description                                                  | Values                                                                                    |
 | ---------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| `-h` or `--help`             | Show the help                                                | -                                                                                         |
+| `-h` or `--help`             | Show help                                                | -                                                                                         |
 | `-V` or `--version`          | Show the version                                             | -                                                                                         |
 | `-d` or `--debug`            | Debug mode                                                   | -                                                                                         |
 | `-l` or `--link`             | Linking with cmus (close the program if cmus is not running) | -                                                                                         |
@@ -70,7 +70,7 @@ cmus-rpc-rs --p1f "Anas listening to %title%" --p2f "From %artist%"
 [![BitBucket](https://img.shields.io/badge/BitBucket-Mirror%20repo-brightgreen?style=for-the-badge&logo=BitBucket)](https://bitbucket.org/anas_elgarhy/cmus-rpc-rs)
 [![Codeberg](https://img.shields.io/badge/Codeberg-Mirror%20repo-brightgreen?style=for-the-badge&logo=Codeberg)](https://codeberg.org/anas-elgarhy/cmus-rpc-rs)
 
-### Recourses
+### Resources
 
 - [`cmus-remote` tool](https://github.com/cmus/cmus) to the make a query to the cmus
 - [Discord Rich Presence](https://github.com/nickofolas/discord-rich-presence) A simple, cross-platform crate for interfacing with Discord's IPC.
@@ -81,6 +81,6 @@ cmus-rpc-rs --p1f "Anas listening to %title%" --p2f "From %artist%"
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=anas-elgarhy_cmus-rpc-rs)
 
-> This is my first project useing rust 😆, support me with star yoo 💙🦀
+> This is my first project using rust 😆, support me with star yoo 💙🦀
 
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://spdx.org/licenses/MIT.html)
