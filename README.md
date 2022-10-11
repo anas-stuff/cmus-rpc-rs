@@ -7,6 +7,10 @@
 <img alt="image 1" src="./Screenshots/1_0.1.0.png">
 <img alt="image 2" src="./Screenshots/2_0.1.0.png">
 
+#### *Read this in other languages.*
+
+[🇯🇵 japanese](translations/README-jp.md)
+
 - Require cmus
 
 ## Install
