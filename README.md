@@ -11,7 +11,7 @@
 
 [🇯🇵 japanese](translations/README-jp.md)
 
-- Require cmus
+- Requires cmus
 
 ## Install
 
