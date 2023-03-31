@@ -28,4 +28,4 @@ categories = [
 [dependencies]
 discord-rich-presence = "0.2.3"
 clap = "3.2.22" # 4.^ it will break the code :(
-dirs = "4.0.0"
+dirs = "5.0.0"
